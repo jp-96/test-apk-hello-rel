@@ -1,0 +1,37 @@
+`gh` CLI で他リポジトリに**タグ作成**・**リリース作成**を行うには、  
+Personal Access Token（PAT）に以下の権限が必要です。
+
+---
+
+### classicトークンの場合
+
+- `repo`  
+  （これでリポジトリの内容・リリース・タグなど全て操作可能）
+
+---
+
+### fine-grainedトークンの場合
+
+- **Repository permissions**  
+  - `Contents` → **Read and write**（タグ作成に必要）
+  - `Metadata` → **Read-only**（リポジトリ情報取得に必要）
+  - `Issues` → 不要
+  - `Pull requests` → 不要
+  - `Actions` → 不要
+  - `Releases` → **Read and write**（リリース作成・アセット追加に必要）
+
+- **Repository access**  
+  - `jp-96/test-apk-hello-rel` だけを選択
+
+---
+
+#### まとめ
+
+- タグ作成 → `Contents: Read and write`
+- リリース作成・アセット追加 → `Releases: Read and write`
+- リポジトリ情報取得 → `Metadata: Read-only`
+
+---
+
+**参考:**  
+[GitHub公式: Fine-grained personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-fine-grained-personal-access-token)
