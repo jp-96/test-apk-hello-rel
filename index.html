@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OneStroke - Tokyo-born Stroke Sports App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #e0f7fa;
+      color: #004d40;
+    }
+    header {
+      position: relative;
+      height: 60vh;
+      overflow: hidden;
+    }
+    .slider {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      opacity: 0;
+      animation: fade 15s infinite;
+    }
+    .slider img:nth-child(1) { animation-delay: 0s; }
+    .slider img:nth-child(2) { animation-delay: 5s; }
+    .slider img:nth-child(3) { animation-delay: 10s; }
+
+    @keyframes fade {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      30% { opacity: 1; }
+      40% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 1em;
+    }
+
+    .overlay h1 {
+      font-size: 3em;
+      margin-bottom: 0.3em;
+    }
+
+    .overlay p {
+      font-size: 1.2em;
+    }
+
+    .lang-toggle {
+      position: absolute;
+      top: 1em;
+      right: 3em;
+    }
+
+    .lang-toggle button {
+      background: #00acc1;
+      color: white;
+      border: none;
+      padding: 0.5em 1em;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 2em;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #00796b;
+      border-bottom: 2px solid #4dd0e1;
+      padding-bottom: 0.3em;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5em;
+      margin-top: 1em;
+    }
+
+    .feature {
+      background: white;
+      padding: 1em;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .reviewText {
+      font-style: italic;
+      color: #00695c;
+    }
+
+    footer {
+      background: #004d40;
+      color: white;
+      text-align: center;
+      padding: 1.5em;
+      margin-top: 3em;
+    }
+
+    .download-link {
+      font-weight: bold;
+      color: #00796b;
+    }
+
+    .note {
+      font-size: 0.9em;
+      color: #00695c;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="slider">
+    <img src="pexels-frank-minjarez-333886454-30993363.jpg" alt="Tokyo Skytree">
+    <img src="pexels-santesson89-31100419.jpg" alt="Tokyo Bay">
+    <img src="pexels-balazsimon-16325033.jpg" alt="Mt. Fuji">
+  </div>
+  <div class="overlay">
+    <div class="lang-toggle">
+      <button onclick="toggleLang()">Japanese / English</button>
+    </div>
+    <h1 id="title">OneStroke</h1>
+    <p id="subtitle">Track Every Stroke. From Tokyo to the World.</p>
+  </div>
+</header>
+
+<section>
+  <h2 id="downloadTitle">Join as a Tester</h2>
+  <p id="downloadText">
+    Help shape OneStroke by testing the latest Android version.<br>
+    <a href="https://appdistribution.firebase.dev/i/3163df5d52d9ca08" target="_blank" class="download-link">📱 Become a Tester</a>
+    <div class="note" id="downloadNote">Requires a Google account and Android device.</div>
+  </p>
+</section>
+
+<section>
+  <h2 id="featureTitle">Features</h2>
+  <div class="features">
+    <div class="feature">
+      <h3>🌀 <span class="label">Stroke Detection</span></h3>
+      <p class="desc">Real-time stroke detection using accelerometer.</p>
+    </div>
+    <div class="feature">
+      <h3>📍 <span class="label">GPS Tracking</span></h3>
+      <p class="desc">Automatically records route and distance.</p>
+    </div>
+    <div class="feature">
+      <h3>⏱ <span class="label">Auto Timing</span></h3>
+      <p class="desc">Auto start/stop based on stroke motion.</p>
+    </div>
+    <div class="feature">
+      <h3>❤️ <span class="label">BLE Heart Rate</span></h3>
+      <p class="desc">Connects to BLE heart rate monitors.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="reviewTitle">User Reviews</h2>
+  <div class="features">
+    <div class="feature">
+      <p class="reviewText">"OneStroke helped me visualize my stroke rhythm. My training has completely changed."</p>
+    </div>
+    <div class="feature">
+      <p class="reviewText">"GPS and heart rate integration is super convenient. I love reviewing my sessions."</p>
+    </div>
+    <div class="feature">
+      <p class="reviewText">"The auto timing feature is a game changer. No more manual stopwatch!"</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p id="footerText">© 2025 OneStroke</p>
+</footer>
+
+<script>
+  const translations = {
+    en: {
+      subtitle: "Track Every Stroke. From Tokyo to the World.",
+      featureTitle: "Features",
+      reviewTitle: "User Reviews",
+      downloadTitle: "Join as a Tester",
+      downloadText: `Help shape OneStroke by testing the latest Android version.<br><a href="https://appdistribution.firebase.dev/i/3163df5d52d9ca08" target="_blank" class="download-link">📱 Become a Tester</a>`,
+      downloadNote: "Requires a Google account and Android device.",
+      labels: ["Stroke Detection", "GPS Tracking", "Auto Timing", "BLE Heart Rate"],
+      descs: [
+        "Real-time stroke detection using accelerometer.",
+        "Automatically records route and distance.",
+        "Auto start/stop based on stroke motion.",
+        "Connects to BLE heart rate monitors."
+      ],
+      reviews: [
+        `"OneStroke helped me visualize my stroke rhythm. My training has completely changed."`,
+        `"GPS and heart rate integration is super convenient. I love reviewing my sessions."`,
+        `"The auto timing feature is a game changer. No more manual stopwatch!"`
+      ],
+      footer: "© 2025 OneStroke"
+    },
+    ja: {
+      subtitle: "ひと漕ぎのすべてを記録する。東京発、世界へ",
+      featureTitle: "主な機能",
+      reviewTitle: "ユーザーレビュー",
+      downloadTitle: "テスター参加はこちら",
+      downloadText: `最新のOneStroke Android版を試して、開発にご協力ください。<br><a href="https://appdistribution.firebase.dev/i/3163df5d52d9ca08" target="_blank" class="download-link">📱 テスターとして参加する</a>`,
+      downloadNote: "GoogleアカウントとAndroid端末が必要です。",
+      labels: ["ストローク検出", "GPSトラッキング", "自動タイム計測", "BLE心拍センサー"],
+      descs: [
+        "加速度センサーで一漕ぎごとにリアルタイム検出。",
+        "航行ルートと距離を自動記録。",
+        "ストローク開始で自動スタート、停止も自動検出。",
+        "Bluetooth対応心拍計と連携し、ハートレートを表示。"
+      ],
+      reviews: [
+        `"OneStrokeで漕ぎのリズムが見えるようになり、トレーニングが劇的に変わりました。"`,
+        `"GPSと心拍の連携がとても便利。セッションの振り返りが楽しいです。"`,
+        `"自動タイム計測は革命的。もうストップウォッチは不要です！"`
+      ],
+      footer: "© 2025 OneStroke"
+    }
+  };
+
+  let currentLang = navigator.language.startsWith("ja") ? "ja" : "en";
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const t = translations[currentLang];
+    document.getElementById("subtitle").textContent = t.subtitle;
+    document.getElementById("featureTitle").textContent = t.featureTitle;
+    document.getElementById("reviewTitle").textContent = t.reviewTitle;
+    document.getElementById("downloadTitle").textContent = t.downloadTitle;
+    document.getElementById("downloadText").innerHTML = t.downloadText;
+    document.getElementById("downloadNote").textContent = t.downloadNote;
+    document.querySelectorAll(".label").forEach((el, i) => el.textContent = t.labels[i]);
+    document.querySelectorAll(".desc").forEach((el, i) => el.textContent = t.descs[i]);
+    document.querySelectorAll(".reviewText").forEach((el, i) => el.textContent = t.reviews[i]);
+    document.getElementById("footerText").textContent = t.footer;
+  });
+
+  function toggleLang() {
+    currentLang = currentLang === "en" ? "ja" : "en";
+    const t = translations[currentLang];
+    document.getElementById("subtitle").textContent = t.subtitle;
+    document.getElementById("featureTitle").textContent = t.featureTitle;
+    document.getElementById("reviewTitle").textContent = t.reviewTitle;
+    document.getElementById("downloadTitle").textContent = t.downloadTitle;
+    document.getElementById("downloadText").innerHTML = t.downloadText;
+    document.getElementById("downloadNote").textContent = t.downloadNote;
+    document.querySelectorAll(".label").forEach((el, i) => el.textContent = t.labels[i]);
+    document.querySelectorAll(".desc").forEach((el, i) => el.textContent = t.descs[i]);
+    document.querySelectorAll(".reviewText").forEach((el, i) => el.textContent = t.reviews[i]);
+    document.getElementById("footerText").textContent = t.footer;
+  }
+</script>
+
+</body>
+</html>
