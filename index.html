@@ -150,12 +150,19 @@
 </header>
 
 <section>
-  <h2 id="downloadTitle">Join as a Tester</h2>
-  <p id="downloadText">
-    Help shape OneStroke by testing the latest Android version.<br>
-    <a href="https://appdistribution.firebase.dev/i/3163df5d52d9ca08" target="_blank" class="download-link">📱 Become a Tester</a>
-    <div class="note" id="downloadNote">Requires a Google account and Android device.</div>
-  </p>
+  <h2 id="downloadTitle">Download</h2>
+  <div id="downloadBox" style="margin-bottom:2em;">
+    <b id="downloadBoxTitle">Download and Install the Latest APK:</b><br>
+    <a href="https://github.com/jp-96/test-apk-hello-rel/releases/latest" target="_blank" class="download-link" id="downloadLink">⬇️ Download Latest APK</a>
+    <br>
+    <span id="apkHowto">
+      <ol>
+        <li>Download the APK file to your Android device.</li>
+        <li>If prompted, allow installation from unknown sources.</li>
+        <li>Open the APK file and follow the instructions to install.</li>
+      </ol>
+    </span>
+  </div>
 </section>
 
 <section>
@@ -195,6 +202,17 @@
   </div>
 </section>
 
+<section>
+  <h2 id="testerTitle">Join as a Tester</h2>
+  <div id="testerBox">
+    <p id="testerText">
+      Help shape OneStroke by testing the latest Android version.<br>
+      <a href="https://appdistribution.firebase.dev/i/3163df5d52d9ca08" target="_blank" class="download-link">📱 Become a Tester</a>
+      <div class="note" id="downloadNote">Requires a Google account and Android device.</div>
+    </p>
+  </div>
+</section>
+
 <footer>
   <p id="footerText">© 2025 OneStroke</p>
 </footer>
@@ -205,8 +223,16 @@
       subtitle: "Track Every Stroke. From Tokyo to the World.",
       featureTitle: "Features",
       reviewTitle: "User Reviews",
-      downloadTitle: "Join as a Tester",
-      downloadText: `Help shape OneStroke by testing the latest Android version.<br><a href="https://appdistribution.firebase.dev/i/3163df5d52d9ca08" target="_blank" class="download-link">📱 Become a Tester</a>`,
+      downloadTitle: "Download",
+      testerTitle: "Join as a Tester",
+      downloadBoxTitle: "Download and Install the Latest APK:",
+      downloadLink: "⬇️ Download Latest APK",
+      apkHowto: [
+        "Download the APK file to your Android device.",
+        "If prompted, allow installation from unknown sources.",
+        "Open the APK file and follow the instructions to install."
+      ],
+      testerText: `Help shape OneStroke by testing the latest Android version.<br><a href="https://appdistribution.firebase.dev/i/3163df5d52d9ca08" target="_blank" class="download-link">📱 Become a Tester</a>`,
       downloadNote: "Requires a Google account and Android device.",
       labels: ["Stroke Detection", "GPS Tracking", "Auto Timing", "BLE Heart Rate"],
       descs: [
@@ -226,8 +252,16 @@
       subtitle: "ひと漕ぎのすべてを記録する。東京発、世界へ",
       featureTitle: "主な機能",
       reviewTitle: "ユーザーレビュー",
-      downloadTitle: "テスター参加はこちら",
-      downloadText: `最新のOneStroke Android版を試して、開発にご協力ください。<br><a href="https://appdistribution.firebase.dev/i/3163df5d52d9ca08" target="_blank" class="download-link">📱 テスターとして参加する</a>`,
+      downloadTitle: "ダウンロード",
+      testerTitle: "テスター参加",
+      downloadBoxTitle: "最新APKのダウンロードとインストール方法:",
+      downloadLink: "⬇️ 最新APKをダウンロード",
+      apkHowto: [
+        "APKファイルをAndroid端末にダウンロードします。",
+        "警告が表示された場合は「提供元不明のアプリのインストール」を許可してください。",
+        "APKファイルを開き、画面の指示に従ってインストールします。"
+      ],
+      testerText: `最新のOneStroke Android版を試して、開発にご協力ください。<br><a href="https://appdistribution.firebase.dev/i/3163df5d52d9ca08" target="_blank" class="download-link">📱 テスターとして参加する</a>`,
       downloadNote: "GoogleアカウントとAndroid端末が必要です。",
       labels: ["ストローク検出", "GPSトラッキング", "自動タイム計測", "BLE心拍センサー"],
       descs: [
@@ -247,33 +281,31 @@
 
   let currentLang = navigator.language.startsWith("ja") ? "ja" : "en";
 
-  window.addEventListener("DOMContentLoaded", () => {
+  function updateLang() {
     const t = translations[currentLang];
     document.getElementById("subtitle").textContent = t.subtitle;
     document.getElementById("featureTitle").textContent = t.featureTitle;
     document.getElementById("reviewTitle").textContent = t.reviewTitle;
     document.getElementById("downloadTitle").textContent = t.downloadTitle;
-    document.getElementById("downloadText").innerHTML = t.downloadText;
+    document.getElementById("testerTitle").textContent = t.testerTitle;
+    document.getElementById("downloadBoxTitle").textContent = t.downloadBoxTitle;
+    document.getElementById("downloadLink").textContent = t.downloadLink;
+    // Update apkHowto list
+    const apkHowto = document.getElementById("apkHowto");
+    apkHowto.innerHTML = `<ol>${t.apkHowto.map(item => `<li>${item}</li>`).join("")}</ol>`;
+    document.getElementById("testerText").innerHTML = t.testerText;
     document.getElementById("downloadNote").textContent = t.downloadNote;
     document.querySelectorAll(".label").forEach((el, i) => el.textContent = t.labels[i]);
     document.querySelectorAll(".desc").forEach((el, i) => el.textContent = t.descs[i]);
     document.querySelectorAll(".reviewText").forEach((el, i) => el.textContent = t.reviews[i]);
     document.getElementById("footerText").textContent = t.footer;
-  });
+  }
+
+  window.addEventListener("DOMContentLoaded", updateLang);
 
   function toggleLang() {
     currentLang = currentLang === "en" ? "ja" : "en";
-    const t = translations[currentLang];
-    document.getElementById("subtitle").textContent = t.subtitle;
-    document.getElementById("featureTitle").textContent = t.featureTitle;
-    document.getElementById("reviewTitle").textContent = t.reviewTitle;
-    document.getElementById("downloadTitle").textContent = t.downloadTitle;
-    document.getElementById("downloadText").innerHTML = t.downloadText;
-    document.getElementById("downloadNote").textContent = t.downloadNote;
-    document.querySelectorAll(".label").forEach((el, i) => el.textContent = t.labels[i]);
-    document.querySelectorAll(".desc").forEach((el, i) => el.textContent = t.descs[i]);
-    document.querySelectorAll(".reviewText").forEach((el, i) => el.textContent = t.reviews[i]);
-    document.getElementById("footerText").textContent = t.footer;
+    updateLang();
   }
 </script>
 
